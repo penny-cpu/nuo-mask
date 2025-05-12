@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>傩面具五官自由组合</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            font-family: sans-serif;
+            text-align: center;
+        }
+        #mask-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        .part {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 100%;
+            height: auto;
+        }
+        #head { top: 10%; width: 40vw; }
+        #eyes { top: 30%; width: 30vw; }
+        #nose { top: 50%; width: 10vw; }
+        #mouth { top: 65%; width: 20vw; }
+        .buttons {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .buttons button {
+            margin: 5px;
+            padding: 8px 16px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>傩面具五官自由组合</h1>
+    <div id="mask-container">
+        <img id="head" class="part" src="assets/head1.png">
+        <img id="eyes" class="part" src="assets/eye1.png">
+        <img id="nose" class="part" src="assets/nose1.png">
+        <img id="mouth" class="part" src="assets/mouth1.png">
+    </div>
+    <div class="buttons">
+        <button onclick="changePart('head')">换头</button>
+        <button onclick="changePart('eyes')">换眼</button>
+        <button onclick="changePart('nose')">换鼻</button>
+        <button onclick="changePart('mouth')">换嘴</button>
+    </div>
+
+    <script>
+        const parts = {
+            head: [],
+            eyes: [],
+            nose: [],
+            mouth: []
+        };
+
+        // 预加载素材
+        const allFiles = ['assets/nose3.png', 'assets/mouth28.png', 'assets/eye13.png', 'assets/eye12.png', 'assets/mouth15.png', 'assets/mouth29.png', 'assets/nose2.png', 'assets/mouth17.png', 'assets/eye11.png', 'assets/mouth16.png', 'assets/nose1.png', 'assets/nose5.png', 'assets/mouth12.png', 'assets/eye29.png', 'assets/eye15.png', 'assets/eye28.png', 'assets/mouth13.png', 'assets/nose4.png', 'assets/nose6.png', 'assets/mouth11.png', 'assets/eye16.png', 'assets/eye17.png', 'assets/nose7.png', 'assets/head1.png', 'assets/head16.png', 'assets/nose11.png', 'assets/head17.png', 'assets/head2.png', 'assets/head15.png', 'assets/head29.png', 'assets/nose13.png', 'assets/nose12.png', 'assets/head28.png', 'assets/head3.png', 'assets/head7.png', 'assets/nose16.png', 'assets/nose17.png', 'assets/head11.png', 'assets/head6.png', 'assets/head4.png', 'assets/head13.png', 'assets/nose29.png', 'assets/nose15.png', 'assets/nose28.png', 'assets/head12.png', 'assets/head5.png', 'assets/head23.png', 'assets/nose25.png', 'assets/mouth4.png', 'assets/mouth5.png', 'assets/nose24.png', 'assets/head22.png', 'assets/mouth41.png', 'assets/head34.png', 'assets/head20.png', 'assets/nose26.png', 'assets/mouth7.png', 'assets/mouth6.png', 'assets/nose27.png', 'assets/head21.png', 'assets/head25.png', 'assets/nose23.png', 'assets/mouth2.png', 'assets/mouth3.png', 'assets/nose22.png', 'assets/head24.png', 'assets/head26.png', 'assets/nose20.png', 'assets/nose34.png', 'assets/mouth1.png', 'assets/eye41.png', 'assets/nose21.png', 'assets/head27.png', 'assets/mouth21.png', 'assets/eye26.png', 'assets/eye1.png', 'assets/eye27.png', 'assets/head41.png', 'assets/mouth20.png', 'assets/mouth34.png', 'assets/mouth22.png', 'assets/eye25.png', 'assets/eye2.png', 'assets/eye3.png', 'assets/eye24.png', 'assets/mouth23.png', 'assets/mouth27.png', 'assets/eye20.png', 'assets/eye34.png', 'assets/eye7.png', 'assets/eye6.png', 'assets/eye21.png', 'assets/nose41.png', 'assets/mouth26.png', 'assets/mouth24.png', 'assets/eye23.png', 'assets/eye4.png', 'assets/eye5.png', 'assets/eye22.png', 'assets/mouth25.png'];
+
+        for (const file of allFiles) {
+            const name = file.split('/').pop();
+            if (name.startsWith("head")) parts.head.push(file);
+            else if (name.startsWith("eye")) parts.eyes.push(file);
+            else if (name.startsWith("nose")) parts.nose.push(file);
+            else if (name.startsWith("mouth")) parts.mouth.push(file);
+        }
+
+        const indexes = { head: 0, eyes: 0, nose: 0, mouth: 0 };
+
+        function changePart(part) {
+            indexes[part] = (indexes[part] + 1) % parts[part].length;
+            document.getElementById(part).src = parts[part][indexes[part]];
+        }
+    </script>
+</body>
+</html>
